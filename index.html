@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0d2137">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Weather">
+  <title>Weather</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <header>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="today" role="tab" aria-selected="true">Today</button>
+        <button class="tab" data-tab="forecast" role="tab" aria-selected="false">Forecast</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Loading overlay -->
+      <div id="loading-overlay" class="hidden" aria-live="polite">
+        <div class="spinner"></div>
+        <p>Loading weather…</p>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="hidden" role="alert"></div>
+
+      <!-- Today Tab -->
+      <section id="today-tab" class="tab-content active" role="tabpanel">
+        <div id="current-card"></div>
+        <h2 class="section-title">Hourly Forecast</h2>
+        <div id="hourly-scroll" class="hourly-container" role="list"></div>
+      </section>
+
+      <!-- Forecast Tab -->
+      <section id="forecast-tab" class="tab-content" role="tabpanel">
+        <div id="daily-list" role="list"></div>
+      </section>
+    </main>
+
+    <!-- Add City Modal -->
+    <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-label="Add City">
+      <div id="add-city-modal">
+        <h3>Add City</h3>
+        <div class="search-row">
+          <input type="text" id="city-input" placeholder="Search city…" autocomplete="off"
+                 autocorrect="off" autocapitalize="words" spellcheck="false" aria-label="City search">
+          <button id="cancel-add" aria-label="Cancel">✕</button>
+        </div>
+        <div id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="location-bar">
+        <div class="location-select-wrapper">
+          <span class="pin-icon">📍</span>
+          <select id="location-select" aria-label="Select location"></select>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="location-actions">
+          <button id="refresh-btn" aria-label="Refresh weather" title="Refresh">↻</button>
+          <button id="add-city-btn" aria-label="Add city" title="Add city">＋</button>
+          <button id="del-city-btn" aria-label="Remove city" title="Remove city">－</button>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

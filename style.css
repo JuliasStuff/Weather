@@ -1,0 +1,561 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background: linear-gradient(160deg, #0d2137 0%, #14456e 45%, #1a6090 100%);
+  background-attachment: fixed;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== App Shell ===== */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== Header ===== */
+header {
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.location-select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 6px 10px;
+}
+
+.pin-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+#location-select {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#location-select option {
+  background: #0d2137;
+  color: #fff;
+}
+
+.chevron {
+  font-size: 13px;
+  opacity: 0.7;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.location-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.location-actions button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  line-height: 1;
+}
+
+.location-actions button:hover,
+.location-actions button:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+
+/* Footer */
+footer {
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Location Bar */
+.location-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 14px;
+  gap: 8px;
+}
+/* Tabs */
+.tabs {
+  display: flex;
+  padding: 0 16px;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.tab.active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+/* ===== Main Content ===== */
+main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== Tab Content ===== */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ===== Current Conditions Card ===== */
+#current-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 24px 20px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.current-icon {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+.current-temp {
+  font-size: 80px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 4px;
+}
+
+.current-desc {
+  font-size: 19px;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.current-highlow {
+  font-size: 15px;
+  opacity: 0.75;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.current-details {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 14px;
+}
+
+.current-detail-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  opacity: 0.85;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.current-detail-item:last-child {
+  border-right: none;
+}
+
+.current-detail-item .detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.65;
+}
+
+.current-detail-item .detail-val {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ===== Section Title ===== */
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.65;
+  margin-bottom: 10px;
+}
+
+/* ===== Hourly Forecast ===== */
+.hourly-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* Extend to screen edges on small phones */
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.hourly-container::-webkit-scrollbar {
+  display: none;
+}
+
+.hourly-card {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+  text-align: center;
+  min-width: 72px;
+  transition: background 0.2s;
+}
+
+.hourly-card.now {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.hourly-time {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.72;
+  margin-bottom: 8px;
+}
+
+.hourly-icon {
+  font-size: 22px;
+  margin-bottom: 7px;
+  line-height: 1;
+}
+
+.hourly-temp {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.hourly-rain {
+  font-size: 12px;
+  color: #90caf9;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.hourly-wind {
+  font-size: 12px;
+  color: #80deea;
+  font-weight: 500;
+}
+
+/* ===== Daily Forecast List ===== */
+#daily-list {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.daily-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 18px;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.daily-row:last-child {
+  border-bottom: none;
+}
+
+.daily-day {
+  font-size: 16px;
+  font-weight: 500;
+  flex: 0 0 90px;
+}
+
+.daily-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.daily-rain {
+  font-size: 13px;
+  color: #90caf9;
+  font-weight: 500;
+}
+
+.daily-temps {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.daily-temps .high {
+  color: #fff;
+}
+
+.daily-temps .sep {
+  opacity: 0.4;
+  margin: 0 3px;
+  font-weight: 400;
+}
+
+.daily-temps .low {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ===== Loading Overlay ===== */
+#loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 33, 55, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 20;
+  border-radius: 0;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Error Message ===== */
+#error-msg {
+  background: rgba(220, 60, 60, 0.3);
+  border: 1px solid rgba(255, 120, 120, 0.4);
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* ===== Modal ===== */
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 16px 0;
+}
+
+#add-city-modal {
+  background: #0f2a45;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 22px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+#add-city-modal h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+#city-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 11px 14px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#city-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+#city-input:focus {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+#cancel-add {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+#cancel-add:hover,
+#cancel-add:active {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+#search-results {
+  max-height: 280px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.result-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.result-item:hover,
+.result-item:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.result-name {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+}
+
+.result-detail {
+  font-size: 13px;
+  opacity: 0.6;
+  display: block;
+  margin-top: 2px;
+}
+
+.search-status {
+  text-align: center;
+  opacity: 0.55;
+  padding: 18px;
+  font-size: 14px;
+}
+
+/* ===== Utility ===== */
+.hidden {
+  display: none !important;
+}
+
+/* ===== Scrollbar (desktop) ===== */
+main::-webkit-scrollbar {
+  width: 4px;
+}
+
+main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+}
