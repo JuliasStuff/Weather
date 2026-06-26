@@ -113,6 +113,34 @@ function setupEventListeners() {
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => switchTab(tab.dataset.tab));
   });
+
+  // Swipe left/right on main to switch tabs
+  const mainEl = document.querySelector('main');
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let swipeFromScroll = false;
+
+  mainEl.addEventListener('touchstart', e => {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+    swipeFromScroll = document.getElementById('hourly-scroll').contains(e.target);
+  }, { passive: true });
+
+  mainEl.addEventListener('touchend', e => {
+    if (swipeFromScroll) {
+      return;
+    }
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dy = e.changedTouches[0].clientY - swipeStartY;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) {
+      return;
+    }
+    if (dx < 0) {
+      switchTab('forecast');
+    } else {
+      switchTab('today');
+    }
+  }, { passive: true });
 }
 
 function switchTab(tabId) {
