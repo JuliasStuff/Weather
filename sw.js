@@ -1,15 +1,18 @@
 // Service Worker for Weather PWA
 // Caches app shell; always fetches live data from Open-Meteo.
 
-const CACHE  = 'weather-v2';
+const CACHE  = 'weather-v3';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './manifest.json',
-  './icon.svg',
-  './icon-maskable.svg'
+  './icon-192.png',
+  './icon-512.png',
+  './favicon.ico',
+  './favicon-16.png',
+  './favicon-32.png'
 ];
 
 // ── Install: cache app shell ─────────────────────────────────
