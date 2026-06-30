@@ -353,7 +353,7 @@ function renderHourly() {
 
     card.innerHTML = `
       <div class="hourly-time">${timeLabel}</div>
-      <div class="hourly-icon">${weatherIcon(h.weathercode[i])}</div>
+      <div class="hourly-icon">${weatherIcon(h.weathercode[i], rain)}</div>
       <div class="hourly-temp">${Math.round(h.temperature_2m[i])}°</div>
       <div class="hourly-rain">💧 ${rain}%</div>
       <div class="hourly-wind">💨 ${wind}</div>
@@ -383,7 +383,7 @@ function renderForecast() {
 
     row.innerHTML = `
       <div class="daily-day">${dayLabel}</div>
-      <div class="daily-icon">${weatherIcon(d.weathercode[i])}</div>
+      <div class="daily-icon">${weatherIcon(d.weathercode[i], rain)}</div>
       <div class="daily-rain">💧 ${rain}%</div>
       <div class="daily-temps">
         <span class="high">${hi}°</span>
@@ -407,8 +407,20 @@ function formatHourStr(timeStr) {
   return `${display}${ampm}`;
 }
 
-/** WMO weather codes → emoji */
-function weatherIcon(code) {
+/** WMO weather codes → emoji.
+ *  Optional rainPct: if very low, suppress rain icons (Open-Meteo can
+ *  report a daily "rain showers" code while the peak probability for
+ *  the day is only a few percent).
+ */
+function weatherIcon(code, rainPct) {
+  if (typeof rainPct === 'number' && rainPct < 20) {
+    const isRainy = (code >= 51 && code <= 67)
+                 || (code >= 80 && code <= 82)
+                 || (code >= 95 && code <= 99);
+    if (isRainy) {
+      return '☁️';
+    }
+  }
   if (code === 0)            return '☀️';
   if (code <= 2)             return '🌤️';
   if (code === 3)            return '☁️';
